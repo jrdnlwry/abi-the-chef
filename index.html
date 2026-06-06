@@ -1,0 +1,1881 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abi The Chef | Private Dining in Raleigh, NC</title>
+  <meta name="description" content="Abi The Chef creates approachable fine dining and personalized private dining experiences in Raleigh, NC, rooted in seasonal ingredients, thoughtful presentation, and warm hospitality." />
+  <style>
+    :root {
+      --ivory: #f8f2e8;
+      --warm-white: #fffaf3;
+      --cream: #efe2cf;
+      --charcoal: #25211d;
+      --brown: #4b3528;
+      --deep-brown: #2f2119;
+      --gold: #b58a4b;
+      --gold-dark: #96703a;
+      --olive: #6f7355;
+      --clay: #c2775a;
+      --muted: #766a5f;
+      --line: rgba(75, 53, 40, 0.18);
+      --shadow: 0 24px 80px rgba(37, 33, 29, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1180px;
+      --serif: Georgia, "Times New Roman", Times, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--charcoal);
+      background: var(--warm-white);
+      line-height: 1.65;
+    }
+
+    body.menu-open,
+    body.lightbox-open {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 1rem;
+      z-index: 999;
+      background: var(--charcoal);
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+    }
+
+    .skip-link:focus {
+      left: 1rem;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--gold-dark);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.7;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--serif);
+      line-height: 1.05;
+      color: var(--deep-brown);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 8vw, 7.4rem);
+      letter-spacing: -0.065em;
+    }
+
+    h2 {
+      font-size: clamp(2.35rem, 5vw, 4.7rem);
+      letter-spacing: -0.045em;
+    }
+
+    h3 {
+      font-size: clamp(1.35rem, 2vw, 1.85rem);
+      letter-spacing: -0.025em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .section {
+      padding: clamp(74px, 9vw, 132px) 0;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 42px;
+    }
+
+    .section-header h2 {
+      margin-top: 14px;
+    }
+
+    .section-header p {
+      margin-top: 18px;
+      font-size: 1.06rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.85rem 1.25rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-weight: 750;
+      letter-spacing: 0.01em;
+      transition: transform 220ms ease, background 220ms ease, border-color 220ms ease, color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--deep-brown);
+      color: var(--warm-white);
+      box-shadow: 0 12px 34px rgba(47, 33, 25, 0.2);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: var(--brown);
+    }
+
+    .btn-secondary {
+      border-color: rgba(248, 242, 232, 0.55);
+      color: var(--warm-white);
+      background: rgba(255, 250, 243, 0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: rgba(255, 250, 243, 0.18);
+    }
+
+    .btn-light {
+      background: var(--warm-white);
+      color: var(--deep-brown);
+      border-color: rgba(75, 53, 40, 0.16);
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      padding: 18px 0;
+      transition: background 220ms ease, padding 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .site-header.scrolled {
+      padding: 10px 0;
+      background: rgba(255, 250, 243, 0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(75, 53, 40, 0.12);
+      box-shadow: 0 12px 44px rgba(37, 33, 29, 0.06);
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.72rem;
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      color: var(--warm-white);
+      letter-spacing: -0.035em;
+      position: relative;
+      z-index: 103;
+    }
+
+    .site-header.scrolled .logo {
+      color: var(--deep-brown);
+    }
+
+    .logo-mark {
+      width: 35px;
+      height: 35px;
+      border: 1px solid rgba(255, 250, 243, 0.7);
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      font-family: var(--sans);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      color: inherit;
+    }
+
+    .site-header.scrolled .logo-mark {
+      border-color: rgba(47, 33, 25, 0.25);
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: rgba(255, 250, 243, 0.88);
+      font-size: 0.94rem;
+      font-weight: 650;
+    }
+
+    .site-header.scrolled .desktop-nav {
+      color: var(--brown);
+    }
+
+    .desktop-nav a {
+      position: relative;
+    }
+
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 200ms ease;
+      opacity: 0.7;
+    }
+
+    .desktop-nav a:hover::after,
+    .desktop-nav a:focus-visible::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--deep-brown);
+      padding: 0.72rem 1.05rem;
+      min-height: 42px;
+    }
+
+    .nav-cta:hover,
+    .nav-cta:focus-visible {
+      background: #c79a59;
+    }
+
+    .menu-toggle {
+      display: none;
+      position: relative;
+      z-index: 103;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 250, 243, 0.42);
+      background: rgba(255, 250, 243, 0.08);
+      color: var(--warm-white);
+      cursor: pointer;
+    }
+
+    .site-header.scrolled .menu-toggle {
+      color: var(--deep-brown);
+      border-color: rgba(47, 33, 25, 0.18);
+      background: rgba(255, 250, 243, 0.88);
+    }
+
+    .menu-toggle span {
+      position: absolute;
+      left: 13px;
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      transition: transform 200ms ease, top 200ms ease, opacity 200ms ease;
+    }
+
+    .menu-toggle span:nth-child(1) { top: 16px; }
+    .menu-toggle span:nth-child(2) { top: 22px; }
+    .menu-toggle span:nth-child(3) { top: 28px; }
+
+    .menu-open .menu-toggle span:nth-child(1) {
+      top: 22px;
+      transform: rotate(45deg);
+    }
+
+    .menu-open .menu-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-open .menu-toggle span:nth-child(3) {
+      top: 22px;
+      transform: rotate(-45deg);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 102;
+      background: var(--deep-brown);
+      color: var(--warm-white);
+      display: grid;
+      place-items: center;
+      transform: translateY(-105%);
+      transition: transform 280ms ease;
+      padding: 80px 24px 32px;
+    }
+
+    .mobile-nav.open {
+      transform: translateY(0);
+    }
+
+    .mobile-nav-inner {
+      display: grid;
+      gap: 18px;
+      width: min(440px, 100%);
+      text-align: center;
+    }
+
+    .mobile-nav a {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      align-items: end;
+      color: var(--warm-white);
+      overflow: hidden;
+      background: var(--deep-brown);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(25, 18, 13, 0.76), rgba(25, 18, 13, 0.44) 45%, rgba(25, 18, 13, 0.15)),
+        linear-gradient(0deg, rgba(25, 18, 13, 0.66), rgba(25, 18, 13, 0.06) 50%);
+      z-index: 1;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.02);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 150px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) 0.85fr;
+      align-items: end;
+      gap: 54px;
+    }
+
+    .hero-copy {
+      max-width: 850px;
+    }
+
+    .hero-copy h1 {
+      color: var(--warm-white);
+      text-wrap: balance;
+    }
+
+    .hero-copy p {
+      color: rgba(255, 250, 243, 0.83);
+      font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+      max-width: 720px;
+      margin-top: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .hero-card {
+      background: rgba(255, 250, 243, 0.13);
+      border: 1px solid rgba(255, 250, 243, 0.22);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      max-width: 365px;
+      justify-self: end;
+    }
+
+    .hero-card img {
+      height: 230px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .hero-card p {
+      color: rgba(255, 250, 243, 0.78);
+      font-size: 0.95rem;
+    }
+
+    .hero-card strong {
+      display: block;
+      font-family: var(--serif);
+      color: var(--warm-white);
+      font-size: 1.55rem;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .marquee-note {
+      background: var(--ivory);
+      border-block: 1px solid var(--line);
+      overflow: hidden;
+      white-space: nowrap;
+      color: var(--brown);
+      font-weight: 720;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      gap: 30px;
+      padding: 15px 0;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-track span::after {
+      content: "•";
+      margin-left: 30px;
+      color: var(--gold);
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .value-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 250, 243, 0.72);
+      min-height: 210px;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: rgba(181, 138, 75, 0.35);
+    }
+
+    .value-number {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: var(--ivory);
+      color: var(--gold-dark);
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .value-card h3 {
+      margin-bottom: 12px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(34px, 6vw, 82px);
+      align-items: center;
+    }
+
+    .image-stack {
+      position: relative;
+      min-height: 540px;
+    }
+
+    .image-stack img {
+      object-fit: cover;
+      box-shadow: var(--shadow);
+    }
+
+    .image-main {
+      height: 520px;
+      border-radius: 36px;
+    }
+
+    .image-float {
+      position: absolute;
+      right: -20px;
+      bottom: 28px;
+      width: 48%;
+      min-width: 220px;
+      height: 255px;
+      border-radius: 26px;
+      border: 10px solid var(--warm-white);
+    }
+
+    .about-copy p {
+      margin-top: 18px;
+      font-size: 1.06rem;
+    }
+
+    .signature {
+      margin-top: 28px;
+      padding: 22px 0 0;
+      border-top: 1px solid var(--line);
+      font-family: var(--serif);
+      color: var(--deep-brown);
+      font-size: clamp(1.45rem, 2.6vw, 2.2rem);
+      line-height: 1.15;
+    }
+
+    .farm {
+      background:
+        radial-gradient(circle at 10% 10%, rgba(194, 119, 90, 0.12), transparent 32%),
+        linear-gradient(135deg, var(--deep-brown), #4a3529);
+      color: var(--warm-white);
+      overflow: hidden;
+    }
+
+    .farm h2,
+    .farm h3 {
+      color: var(--warm-white);
+    }
+
+    .farm p {
+      color: rgba(255, 250, 243, 0.76);
+    }
+
+    .farm-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .farm-image-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.78fr;
+      gap: 16px;
+      align-items: end;
+    }
+
+    .farm-image-grid img {
+      object-fit: cover;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 250, 243, 0.14);
+    }
+
+    .farm-image-grid img:first-child {
+      height: 560px;
+    }
+
+    .farm-image-grid img:last-child {
+      height: 390px;
+      margin-bottom: 44px;
+    }
+
+    .farm-points {
+      display: grid;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .farm-point {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px;
+      border: 1px solid rgba(255, 250, 243, 0.14);
+      border-radius: 18px;
+      background: rgba(255, 250, 243, 0.07);
+    }
+
+    .farm-point span {
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding: 26px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: var(--ivory);
+      min-height: 270px;
+      counter-increment: step;
+    }
+
+    .step::before {
+      content: "0" counter(step);
+      display: block;
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      color: var(--gold-dark);
+      margin-bottom: 26px;
+      line-height: 1;
+    }
+
+    .step h3 {
+      font-size: 1.28rem;
+      margin-bottom: 12px;
+    }
+
+    .menu-section {
+      background: var(--ivory);
+    }
+
+    .menu-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 0;
+      background: var(--warm-white);
+      border-radius: 38px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .menu-image {
+      min-height: 100%;
+      object-fit: cover;
+    }
+
+    .menu-content {
+      padding: clamp(28px, 5vw, 62px);
+    }
+
+    .menu-note {
+      margin-top: 15px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .menu-columns {
+      display: grid;
+      gap: 34px;
+      margin-top: 34px;
+    }
+
+    .menu-category h3 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      color: var(--brown);
+      margin-bottom: 18px;
+    }
+
+    .menu-category h3::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: var(--line);
+    }
+
+    .menu-item {
+      display: grid;
+      gap: 6px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(75, 53, 40, 0.1);
+      color: var(--deep-brown);
+    }
+
+    .menu-item span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 1fr;
+      grid-auto-rows: 190px;
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border: 0;
+      padding: 0;
+      border-radius: 24px;
+      overflow: hidden;
+      cursor: zoom-in;
+      background: var(--ivory);
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-row: span 2;
+    }
+
+    .gallery-item:nth-child(4) {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 420ms ease, filter 420ms ease;
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:focus-visible img {
+      transform: scale(1.045);
+      filter: brightness(0.92);
+    }
+
+    .occasions {
+      background:
+        linear-gradient(rgba(255, 250, 243, 0.92), rgba(255, 250, 243, 0.92)),
+        url('/images/private-dinner-table.jpg') center / cover fixed;
+    }
+
+    .occasion-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .occasion-pill {
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 250, 243, 0.82);
+      color: var(--brown);
+      font-weight: 760;
+      text-align: center;
+    }
+
+    .dietary-card {
+      display: grid;
+      grid-template-columns: 0.88fr 1.12fr;
+      gap: 40px;
+      align-items: center;
+      padding: clamp(28px, 5vw, 58px);
+      border-radius: 38px;
+      background: var(--deep-brown);
+      color: var(--warm-white);
+      overflow: hidden;
+    }
+
+    .dietary-card h2 {
+      color: var(--warm-white);
+    }
+
+    .dietary-card p {
+      color: rgba(255, 250, 243, 0.76);
+      margin-top: 18px;
+    }
+
+    .dietary-note {
+      display: inline-flex;
+      margin-top: 24px;
+      padding: 14px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 250, 243, 0.18);
+      background: rgba(255, 250, 243, 0.08);
+      color: var(--warm-white);
+      font-weight: 750;
+    }
+
+    .dietary-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .dietary-list li {
+      list-style: none;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255, 250, 243, 0.08);
+      border: 1px solid rgba(255, 250, 243, 0.12);
+      color: rgba(255, 250, 243, 0.86);
+    }
+
+    .testimonials {
+      background: var(--ivory);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .quote {
+      padding: 30px;
+      border-radius: var(--radius-md);
+      background: var(--warm-white);
+      border: 1px solid var(--line);
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote p {
+      font-family: var(--serif);
+      font-size: 1.46rem;
+      line-height: 1.22;
+      color: var(--deep-brown);
+      letter-spacing: -0.02em;
+    }
+
+    .quote span {
+      display: block;
+      margin-top: 24px;
+      color: var(--gold-dark);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .consultation {
+      background:
+        linear-gradient(120deg, rgba(47, 33, 25, 0.93), rgba(47, 33, 25, 0.82)),
+        url('/images/gallery-1.jpg') center / cover;
+      color: var(--warm-white);
+    }
+
+    .consultation h2 {
+      color: var(--warm-white);
+    }
+
+    .consultation p {
+      color: rgba(255, 250, 243, 0.78);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: clamp(28px, 5vw, 60px);
+      align-items: start;
+    }
+
+    .form-panel {
+      padding: clamp(24px, 4vw, 44px);
+      border-radius: 32px;
+      background: rgba(255, 250, 243, 0.1);
+      border: 1px solid rgba(255, 250, 243, 0.18);
+      backdrop-filter: blur(18px);
+    }
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: rgba(255, 250, 243, 0.88);
+      font-weight: 760;
+      font-size: 0.92rem;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid rgba(255, 250, 243, 0.22);
+      border-radius: 16px;
+      background: rgba(255, 250, 243, 0.92);
+      color: var(--charcoal);
+      padding: 0.92rem 1rem;
+      outline: none;
+      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    textarea {
+      min-height: 142px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(181, 138, 75, 0.22);
+      background: #fff;
+    }
+
+    .form-help {
+      grid-column: 1 / -1;
+      font-size: 0.92rem;
+      color: rgba(255, 250, 243, 0.7);
+    }
+
+    .error {
+      color: #ffe2d4;
+      font-size: 0.86rem;
+      min-height: 1.1rem;
+    }
+
+    .success-message {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(186, 224, 175, 0.16);
+      border: 1px solid rgba(186, 224, 175, 0.36);
+      color: #f6fff3;
+      font-weight: 750;
+    }
+
+    .success-message.visible {
+      display: block;
+    }
+
+    .site-footer {
+      background: var(--deep-brown);
+      color: var(--warm-white);
+      padding: 54px 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 32px;
+      padding-bottom: 38px;
+      border-bottom: 1px solid rgba(255, 250, 243, 0.14);
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--warm-white);
+      margin-bottom: 13px;
+    }
+
+    .footer-grid p,
+    .footer-grid a,
+    .footer-bottom {
+      color: rgba(255, 250, 243, 0.68);
+    }
+
+    .footer-column {
+      display: grid;
+      gap: 9px;
+      align-content: start;
+    }
+
+    .footer-column strong {
+      color: var(--warm-white);
+      margin-bottom: 4px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      font-size: 0.92rem;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: none;
+      place-items: center;
+      background: rgba(25, 18, 13, 0.9);
+      padding: 24px;
+    }
+
+    .lightbox.open {
+      display: grid;
+    }
+
+    .lightbox img {
+      max-width: min(1050px, 92vw);
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 22px;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 250, 243, 0.26);
+      background: rgba(255, 250, 243, 0.1);
+      color: var(--warm-white);
+      cursor: pointer;
+      font-size: 1.6rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 620ms ease, transform 620ms ease;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1040px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero-grid,
+      .split,
+      .farm-grid,
+      .menu-card,
+      .dietary-card,
+      .form-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        justify-self: start;
+      }
+
+      .value-grid,
+      .testimonial-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .menu-image {
+        max-height: 420px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-content {
+        padding: 128px 0 46px;
+      }
+
+      .hero-grid {
+        gap: 28px;
+      }
+
+      .hero-card {
+        padding: 18px;
+      }
+
+      .hero-card img {
+        height: 180px;
+      }
+
+      .value-grid,
+      .steps,
+      .testimonial-grid,
+      .occasion-grid,
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .image-stack {
+        min-height: auto;
+      }
+
+      .image-main {
+        height: 410px;
+      }
+
+      .image-float {
+        display: none;
+      }
+
+      .farm-image-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .farm-image-grid img:first-child,
+      .farm-image-grid img:last-child {
+        height: 330px;
+        margin: 0;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 250px;
+      }
+
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) {
+        grid-row: auto;
+        grid-column: auto;
+      }
+
+      .occasion-pill {
+        border-radius: 18px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="container nav-wrap">
+      <a class="logo" href="#top" aria-label="Abi The Chef home">
+        <span class="logo-mark">ATC</span>
+        Abi The Chef
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#sample-menu">Sample Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#consultation">Consultation</a>
+        <a class="btn nav-cta" href="#consultation">Book a Consultation</a>
+      </nav>
+
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="mobile-nav" aria-expanded="false" data-menu-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" data-mobile-nav>
+      <div class="mobile-nav-inner">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#sample-menu">Sample Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#consultation">Consultation</a>
+        <a class="btn nav-cta" href="#consultation">Book a Consultation</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-label="Abi The Chef private dining homepage hero">
+      <img class="hero-bg" src="/images/abi-chef-hero.jpg" alt="Beautifully plated private dining dish by Abi The Chef" />
+      <div class="container hero-content">
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <span class="eyebrow">Private Chef • Raleigh, NC</span>
+            <h1>Approachable Fine Dining, Crafted in Raleigh</h1>
+            <p>Abi The Chef creates personalized private dining experiences rooted in seasonal ingredients, thoughtful presentation, and warm hospitality. From intimate dinner parties to holiday gatherings, every menu is tailored to your tastes, dietary preferences, and occasion.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#consultation">Book a Dining Consultation</a>
+              <a class="btn btn-secondary" href="#sample-menu">View Sample Menu</a>
+            </div>
+          </div>
+
+          <aside class="hero-card reveal" aria-label="Private dining highlight">
+            <img src="/images/private-dinner-table.jpg" alt="An elegant private dinner table setting" />
+            <strong>Tailored menus for the people around your table.</strong>
+            <p>Seasonal, polished, and generous food experiences designed for intimate dinners, celebrations, and meaningful gatherings.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee-note" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Seasonal Menus</span>
+        <span>Warm Hospitality</span>
+        <span>Raleigh Private Dining</span>
+        <span>Dietary-Aware Planning</span>
+        <span>Locally Inspired Ingredients</span>
+        <span>Seasonal Menus</span>
+        <span>Warm Hospitality</span>
+        <span>Raleigh Private Dining</span>
+        <span>Dietary-Aware Planning</span>
+        <span>Locally Inspired Ingredients</span>
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="value-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">The Value</span>
+          <h2 id="value-heading">Private Dining That Feels Personal, Seasonal, and Memorable</h2>
+          <p>Abi brings the quality and care of a refined restaurant experience into your home while keeping the atmosphere warm, welcoming, and centered on your guests.</p>
+        </div>
+
+        <div class="value-grid">
+          <article class="value-card reveal">
+            <span class="value-number">01</span>
+            <h3>Personalized Private Dining</h3>
+            <p>Each experience is tailored around your occasion, guest count, preferred style, and the kind of evening you want to create.</p>
+          </article>
+
+          <article class="value-card reveal">
+            <span class="value-number">02</span>
+            <h3>Local & Sustainable</h3>
+            <p>Menus are shaped around seasonal ingredients, thoughtful sourcing, and a respect for the freshness of the region.</p>
+          </article>
+
+          <article class="value-card reveal">
+            <span class="value-number">03</span>
+            <h3>Approachable Fine Dining</h3>
+            <p>Polished technique and beautiful presentation without the stiff, overly formal feel of a traditional fine dining room.</p>
+          </article>
+
+          <article class="value-card reveal">
+            <span class="value-number">04</span>
+            <h3>Designed Around Guests</h3>
+            <p>Menus can be built around tastes, dietary preferences, allergies, favorite flavors, and the flow of your gathering.</p>
+          </article>
+
+          <article class="value-card reveal">
+            <span class="value-number">05</span>
+            <h3>Hospitality Through Cleanup</h3>
+            <p>From the first consultation to the final course, the experience is handled with care, calm, and professionalism.</p>
+          </article>
+
+          <article class="value-card reveal">
+            <span class="value-number">06</span>
+            <h3>Occasion-Ready</h3>
+            <p>Ideal for intimate dinners, dinner parties, celebrations, holiday gatherings, and small events worth remembering.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-heading">
+      <div class="container split">
+        <div class="image-stack reveal">
+          <img class="image-main" src="/images/abi-portrait.jpg" alt="Portrait of Abi The Chef" />
+          <img class="image-float" src="/images/dish-1.jpg" alt="Seasonal dish prepared by Abi The Chef" />
+        </div>
+
+        <div class="about-copy reveal">
+          <span class="eyebrow">About Abi</span>
+          <h2 id="about-heading">Thoughtful Cooking for Gatherings That Matter</h2>
+          <p>Abi is a dedicated private chef based in Raleigh, NC, creating exceptional dining experiences that celebrate locally sourced, sustainable ingredients. Her cooking is grounded in respect for the region’s natural bounty, refined technique, and the belief that food brings people together.</p>
+          <p>Every experience begins with listening: the occasion, the guests, the atmosphere, the dietary needs, and the flavors that make the meal feel personal. The result is food that feels polished, intentional, and deeply hospitable.</p>
+          <div class="signature">“Every meal is designed to feel thoughtful, generous, and remembered.”</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section farm" aria-labelledby="farm-heading">
+      <div class="container farm-grid">
+        <div class="reveal">
+          <span class="eyebrow">Local Inspiration</span>
+          <h2 id="farm-heading">Raleigh’s Farm-to-Table Elegance</h2>
+          <p style="margin-top: 18px;">Abi’s menus are inspired by the seasons and shaped by the ingredients available from local growers, producers, and markets. Each dish is crafted to highlight freshness, flavor, and a sense of place.</p>
+
+          <div class="farm-points">
+            <div class="farm-point">
+              <span>✦</span>
+              <p>Ingredient-driven menus that shift naturally with the season.</p>
+            </div>
+            <div class="farm-point">
+              <span>✦</span>
+              <p>Thoughtful sourcing that supports freshness, quality, and sustainability.</p>
+            </div>
+            <div class="farm-point">
+              <span>✦</span>
+              <p>Refined plating and warm hospitality for relaxed, memorable meals.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="farm-image-grid reveal">
+          <img src="/images/dish-2.jpg" alt="Close-up of a seasonal plated dish" />
+          <img src="/images/gallery-1.jpg" alt="Fresh ingredients and private chef preparation" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="experience-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">The Experience</span>
+          <h2 id="experience-heading">From First Conversation to Final Course</h2>
+          <p>A clear, guided process helps you know exactly what you are booking while leaving room for creativity, seasonality, and personalization.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step reveal">
+            <h3>Consultation</h3>
+            <p>Discuss the occasion, guest count, preferences, dietary needs, and desired atmosphere.</p>
+          </article>
+
+          <article class="step reveal">
+            <h3>Custom Menu Design</h3>
+            <p>Abi creates a seasonal menu tailored to your tastes, event style, and guests.</p>
+          </article>
+
+          <article class="step reveal">
+            <h3>Ingredient Sourcing</h3>
+            <p>Ingredients are selected with attention to freshness, quality, and sustainability.</p>
+          </article>
+
+          <article class="step reveal">
+            <h3>Private Dining Service</h3>
+            <p>Abi prepares and presents a polished meal in your home or chosen setting.</p>
+          </article>
+
+          <article class="step reveal">
+            <h3>Cleanup & Close</h3>
+            <p>The experience ends with a clean kitchen and a memorable final impression.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="sample-menu" aria-labelledby="menu-heading">
+      <div class="container">
+        <div class="menu-card reveal">
+          <img class="menu-image" src="/images/dish-3.jpg" alt="Elegant plated dish from a sample private dining menu" />
+
+          <div class="menu-content">
+            <span class="eyebrow">Sample Menu</span>
+            <h2 id="menu-heading">A Glimpse at the Table</h2>
+            <p class="menu-note">Every menu is custom-built, but this sample gives a sense of Abi’s approachable fine dining style: seasonal, polished, and full of flavor.</p>
+
+            <div class="menu-columns">
+              <div class="menu-category">
+                <h3>First Course</h3>
+                <div class="menu-item">Charred seasonal vegetables <span>whipped ricotta, herb oil</span></div>
+                <div class="menu-item">Citrus-cured fish <span>cucumber, fennel, preserved lemon</span></div>
+                <div class="menu-item">Roasted beet salad <span>goat cheese, toasted pecans, citrus vinaigrette</span></div>
+              </div>
+
+              <div class="menu-category">
+                <h3>Main Course</h3>
+                <div class="menu-item">Pan-roasted chicken <span>potato pavé, market greens, jus</span></div>
+                <div class="menu-item">Seared fish <span>saffron broth, spring vegetables</span></div>
+                <div class="menu-item">Handmade pasta <span>brown butter, herbs, aged cheese</span></div>
+                <div class="menu-item">Braised short rib <span>root vegetables, red wine reduction</span></div>
+              </div>
+
+              <div class="menu-category">
+                <h3>Dessert</h3>
+                <div class="menu-item">Olive oil cake <span>citrus, crème fraîche</span></div>
+                <div class="menu-item">Chocolate tart <span>sea salt, seasonal fruit</span></div>
+                <div class="menu-item">Vanilla panna cotta <span>berry compote, almond crumble</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery" aria-labelledby="gallery-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Gallery</span>
+          <h2 id="gallery-heading">Moments from the Kitchen and Table</h2>
+          <p>Use this image-forward section to showcase plated dishes, warm table settings, seasonal ingredients, and behind-the-scenes preparation.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <button class="gallery-item reveal" type="button" data-lightbox="/images/gallery-1.jpg" aria-label="Open gallery image 1">
+            <img src="/images/gallery-1.jpg" alt="Private chef preparing seasonal ingredients" />
+          </button>
+          <button class="gallery-item reveal" type="button" data-lightbox="/images/dish-1.jpg" aria-label="Open gallery image 2">
+            <img src="/images/dish-1.jpg" alt="Elegant plated first course" />
+          </button>
+          <button class="gallery-item reveal" type="button" data-lightbox="/images/private-dinner-table.jpg" aria-label="Open gallery image 3">
+            <img src="/images/private-dinner-table.jpg" alt="Private dining table setting" />
+          </button>
+          <button class="gallery-item reveal" type="button" data-lightbox="/images/dish-2.jpg" aria-label="Open gallery image 4">
+            <img src="/images/dish-2.jpg" alt="Seasonal plated main course" />
+          </button>
+          <button class="gallery-item reveal" type="button" data-lightbox="/images/dish-3.jpg" aria-label="Open gallery image 5">
+            <img src="/images/dish-3.jpg" alt="Fine dining dish with seasonal vegetables" />
+          </button>
+          <button class="gallery-item reveal" type="button" data-lightbox="/images/abi-portrait.jpg" aria-label="Open gallery image 6">
+            <img src="/images/abi-portrait.jpg" alt="Abi The Chef portrait" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section occasions" aria-labelledby="occasions-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Occasions</span>
+          <h2 id="occasions-heading">Designed for Gatherings Worth Remembering</h2>
+          <p>Whether your table is set for two or a small holiday gathering for eight, the experience is designed around the atmosphere you want to create.</p>
+        </div>
+
+        <div class="occasion-grid">
+          <div class="occasion-pill reveal">Private dinners</div>
+          <div class="occasion-pill reveal">Dinner parties</div>
+          <div class="occasion-pill reveal">Holiday gatherings</div>
+          <div class="occasion-pill reveal">Anniversaries</div>
+          <div class="occasion-pill reveal">Birthdays</div>
+          <div class="occasion-pill reveal">Small celebrations</div>
+          <div class="occasion-pill reveal">Client dinners</div>
+          <div class="occasion-pill reveal">Dietary-conscious dining</div>
+          <div class="occasion-pill reveal">Special occasions</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="dietary-heading">
+      <div class="container">
+        <div class="dietary-card reveal">
+          <div>
+            <span class="eyebrow">Thoughtful Planning</span>
+            <h2 id="dietary-heading">Menus Tailored to Your Guests</h2>
+            <p>From favorite flavors to dietary preferences, Abi designs each menu around the people at the table. Whether your gathering calls for lighter seasonal dishes, allergy-aware planning, or a menu shaped around specific preferences, the experience is built with care from the beginning.</p>
+            <span class="dietary-note">Share dietary needs during your consultation so the menu can be planned thoughtfully.</span>
+          </div>
+
+          <ul class="dietary-list" aria-label="Dietary preference examples">
+            <li>Menus built around guest preferences and favorite flavors.</li>
+            <li>Allergy-aware planning handled during the consultation process.</li>
+            <li>Seasonal options that can feel lighter, heartier, celebratory, or health-focused.</li>
+            <li>Clear communication before the event so guests feel cared for at the table.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Kind Words</span>
+          <h2 id="testimonials-heading">Hospitality That Feels Seamless</h2>
+        </div>
+
+        <div class="testimonial-grid">
+          <figure class="quote reveal">
+            <p>“Abi turned our anniversary dinner into something that felt intimate, relaxed, and restaurant-quality.”</p>
+            <span>Private Dinner Client</span>
+          </figure>
+
+          <figure class="quote reveal">
+            <p>“The menu felt completely personal to us, and every course was beautifully prepared.”</p>
+            <span>Dinner Party Host</span>
+          </figure>
+
+          <figure class="quote reveal">
+            <p>“Everything from planning to cleanup felt thoughtful and seamless.”</p>
+            <span>Celebration Client</span>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section consultation" id="consultation" aria-labelledby="consultation-heading">
+      <div class="container form-grid">
+        <div class="reveal">
+          <span class="eyebrow">Start the Conversation</span>
+          <h2 id="consultation-heading">Book a Dining Consultation</h2>
+          <p style="margin-top: 18px;">Tell Abi about your gathering, your guests, and the kind of meal you have in mind. She’ll follow up to discuss the details and create a custom quote.</p>
+          <p style="margin-top: 18px;">Submitting this form does not confirm a booking automatically. It starts the consultation process so Abi can learn more about your event and availability.</p>
+        </div>
+
+        <div class="form-panel reveal">
+          <form class="contact-form" data-consultation-form novalidate>
+            <div class="success-message" data-success-message>
+              Thank you — your consultation request has been drafted. Abi will follow up to discuss details, availability, and a custom quote.
+            </div>
+
+            <div class="field">
+              <label for="name">Name *</label>
+              <input id="name" name="name" autocomplete="name" required />
+              <span class="error" data-error-for="name"></span>
+            </div>
+
+            <div class="field">
+              <label for="email">Email *</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+              <span class="error" data-error-for="email"></span>
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" />
+              <span class="error" data-error-for="phone"></span>
+            </div>
+
+            <div class="field">
+              <label for="event-date">Event date *</label>
+              <input id="event-date" name="event-date" type="date" required />
+              <span class="error" data-error-for="event-date"></span>
+            </div>
+
+            <div class="field">
+              <label for="guests">Number of guests *</label>
+              <input id="guests" name="guests" type="number" min="1" required />
+              <span class="error" data-error-for="guests"></span>
+            </div>
+
+            <div class="field">
+              <label for="location">Location / city</label>
+              <input id="location" name="location" autocomplete="address-level2" placeholder="Raleigh, Cary, Durham..." />
+              <span class="error" data-error-for="location"></span>
+            </div>
+
+            <div class="field">
+              <label for="occasion">Occasion type</label>
+              <select id="occasion" name="occasion">
+                <option value="">Select an occasion</option>
+                <option>Private dinner</option>
+                <option>Dinner party</option>
+                <option>Holiday gathering</option>
+                <option>Anniversary</option>
+                <option>Birthday</option>
+                <option>Client dinner</option>
+                <option>Other special occasion</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="method">Preferred consultation method</label>
+              <select id="method" name="method">
+                <option value="">Select a method</option>
+                <option>Phone</option>
+                <option>Email</option>
+                <option>Video call</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="dietary">Dietary restrictions or preferences</label>
+              <textarea id="dietary" name="dietary" placeholder="Allergies, preferences, favorite flavors, dislikes, or planning notes..."></textarea>
+            </div>
+
+            <div class="field full">
+              <label for="message">Message / vision for the dinner *</label>
+              <textarea id="message" name="message" required placeholder="Tell Abi about the atmosphere, menu style, occasion, and anything else she should know."></textarea>
+              <span class="error" data-error-for="message"></span>
+            </div>
+
+            <p class="form-help">Fields marked with * are required. This form is ready to later connect to Netlify Forms, Formspree, or a custom backend.</p>
+
+            <div class="field full">
+              <button class="btn btn-light" type="submit">Request Dining Consultation</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Abi The Chef</div>
+          <p>Approachable fine dining and private dining experiences in Raleigh, NC.</p>
+        </div>
+
+        <div class="footer-column">
+          <strong>Explore</strong>
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#sample-menu">Sample Menu</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#consultation">Consultation</a>
+        </div>
+
+        <div class="footer-column">
+          <strong>Connect</strong>
+          <a href="mailto:hello@abithechef.com">hello@abithechef.com</a>
+          <a href="#" aria-label="Abi The Chef on Instagram">Instagram</a>
+          <a href="#" aria-label="Abi The Chef on Facebook">Facebook</a>
+          <a href="#" aria-label="Abi The Chef on Twitter">Twitter</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span data-year></span> Abi The Chef. All rights reserved.</span>
+        <span>Private dining rooted in Raleigh’s farm-to-table elegance.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" data-lightbox-modal aria-modal="true" role="dialog" aria-label="Image preview">
+    <button class="lightbox-close" type="button" aria-label="Close image preview" data-lightbox-close>×</button>
+    <img src="" alt="" data-lightbox-image />
+  </div>
+
+  <script>
+    const header = document.querySelector('[data-header]');
+    const menuToggle = document.querySelector('[data-menu-toggle]');
+    const mobileNav = document.querySelector('[data-mobile-nav]');
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    const year = document.querySelector('[data-year]');
+    const revealItems = document.querySelectorAll('.reveal');
+    const form = document.querySelector('[data-consultation-form]');
+    const successMessage = document.querySelector('[data-success-message]');
+    const lightboxModal = document.querySelector('[data-lightbox-modal]');
+    const lightboxImage = document.querySelector('[data-lightbox-image]');
+    const lightboxClose = document.querySelector('[data-lightbox-close]');
+    const lightboxTriggers = document.querySelectorAll('[data-lightbox]');
+
+    year.textContent = new Date().getFullYear();
+
+    function updateHeader() {
+      header.classList.toggle('scrolled', window.scrollY > 18);
+    }
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+
+    function closeMenu() {
+      document.body.classList.remove('menu-open');
+      mobileNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open navigation menu');
+    }
+
+    function openMenu() {
+      document.body.classList.add('menu-open');
+      mobileNav.classList.add('open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.setAttribute('aria-label', 'Close navigation menu');
+    }
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.contains('open');
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    function setError(name, message) {
+      const target = form.querySelector(`[data-error-for="${name}"]`);
+      if (target) target.textContent = message;
+    }
+
+    function clearErrors() {
+      form.querySelectorAll('.error').forEach((item) => {
+        item.textContent = '';
+      });
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      clearErrors();
+      successMessage.classList.remove('visible');
+
+      const data = new FormData(form);
+      const name = String(data.get('name') || '').trim();
+      const email = String(data.get('email') || '').trim();
+      const eventDate = String(data.get('event-date') || '').trim();
+      const guests = Number(data.get('guests'));
+      const message = String(data.get('message') || '').trim();
+
+      let valid = true;
+
+      if (!name) {
+        setError('name', 'Please enter your name.');
+        valid = false;
+      }
+
+      if (!email) {
+        setError('email', 'Please enter your email address.');
+        valid = false;
+      } else if (!isValidEmail(email)) {
+        setError('email', 'Please enter a valid email address.');
+        valid = false;
+      }
+
+      if (!eventDate) {
+        setError('event-date', 'Please choose an event date.');
+        valid = false;
+      }
+
+      if (!guests || guests < 1) {
+        setError('guests', 'Please enter the number of guests.');
+        valid = false;
+      }
+
+      if (!message) {
+        setError('message', 'Please share a few details about the dinner.');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      successMessage.classList.add('visible');
+      form.reset();
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    function openLightbox(src, alt) {
+      lightboxImage.src = src;
+      lightboxImage.alt = alt || 'Gallery image preview';
+      lightboxModal.classList.add('open');
+      document.body.classList.add('lightbox-open');
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightboxModal.classList.remove('open');
+      document.body.classList.remove('lightbox-open');
+      lightboxImage.src = '';
+      lightboxImage.alt = '';
+    }
+
+    lightboxTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const img = trigger.querySelector('img');
+        openLightbox(trigger.dataset.lightbox, img ? img.alt : '');
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    lightboxModal.addEventListener('click', (event) => {
+      if (event.target === lightboxModal) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
