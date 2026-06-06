@@ -207,11 +207,6 @@
       top: 0;
       z-index: 100;
       width: 100%;
-      padding: 18px 0;
-      transition: background 220ms ease, padding 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
-    }
-
-    .site-header.scrolled {
       padding: 10px 0;
       background: rgba(255, 250, 243, 0.92);
       backdrop-filter: blur(18px);
@@ -232,20 +227,16 @@
       gap: 0.72rem;
       font-family: var(--serif);
       font-size: 1.45rem;
-      color: var(--warm-white);
+      color: var(--deep-brown);
       letter-spacing: -0.035em;
       position: relative;
       z-index: 103;
     }
 
-    .site-header.scrolled .logo {
-      color: var(--deep-brown);
-    }
-
     .logo-mark {
       width: 35px;
       height: 35px;
-      border: 1px solid rgba(255, 250, 243, 0.7);
+      border: 1px solid rgba(47, 33, 25, 0.25);
       border-radius: 50%;
       display: inline-grid;
       place-items: center;
@@ -255,21 +246,13 @@
       color: inherit;
     }
 
-    .site-header.scrolled .logo-mark {
-      border-color: rgba(47, 33, 25, 0.25);
-    }
-
     .desktop-nav {
       display: flex;
       align-items: center;
       gap: 26px;
-      color: rgba(255, 250, 243, 0.88);
+      color: var(--brown);
       font-size: 0.94rem;
       font-weight: 650;
-    }
-
-    .site-header.scrolled .desktop-nav {
-      color: var(--brown);
     }
 
     .desktop-nav a {
@@ -315,16 +298,10 @@
       width: 46px;
       height: 46px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 250, 243, 0.42);
-      background: rgba(255, 250, 243, 0.08);
-      color: var(--warm-white);
-      cursor: pointer;
-    }
-
-    .site-header.scrolled .menu-toggle {
-      color: var(--deep-brown);
-      border-color: rgba(47, 33, 25, 0.18);
+      border: 1px solid rgba(47, 33, 25, 0.18);
       background: rgba(255, 250, 243, 0.88);
+      color: var(--deep-brown);
+      cursor: pointer;
     }
 
     .menu-toggle span {
@@ -1241,7 +1218,7 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header" data-header>
+  <header class="site-header">
     <div class="container nav-wrap">
       <a class="logo" href="#top" aria-label="Abi The Chef home">
         <span class="logo-mark">ATC</span>
@@ -1720,7 +1697,6 @@
   </div>
 
   <script>
-    const header = document.querySelector('[data-header]');
     const menuToggle = document.querySelector('[data-menu-toggle]');
     const mobileNav = document.querySelector('[data-mobile-nav]');
     const mobileLinks = mobileNav.querySelectorAll('a');
@@ -1734,13 +1710,6 @@
     const lightboxTriggers = document.querySelectorAll('[data-lightbox]');
 
     year.textContent = new Date().getFullYear();
-
-    function updateHeader() {
-      header.classList.toggle('scrolled', window.scrollY > 18);
-    }
-
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
 
     function closeMenu() {
       document.body.classList.remove('menu-open');
