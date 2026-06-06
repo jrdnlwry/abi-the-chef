@@ -246,7 +246,7 @@
       color: inherit;
     }
 
-    .desktop-nav {
+    .primary-nav {
       display: flex;
       align-items: center;
       gap: 26px;
@@ -255,11 +255,11 @@
       font-weight: 650;
     }
 
-    .desktop-nav a {
+    .primary-nav a {
       position: relative;
     }
 
-    .desktop-nav a::after {
+    .primary-nav a::after {
       content: "";
       position: absolute;
       left: 0;
@@ -273,8 +273,8 @@
       opacity: 0.7;
     }
 
-    .desktop-nav a:hover::after,
-    .desktop-nav a:focus-visible::after {
+    .primary-nav a:hover::after,
+    .primary-nav a:focus-visible::after {
       transform: scaleX(1);
       transform-origin: left;
     }
@@ -329,36 +329,6 @@
     .menu-open .menu-toggle span:nth-child(3) {
       top: 22px;
       transform: rotate(-45deg);
-    }
-
-    .mobile-nav {
-      position: fixed;
-      inset: 0;
-      z-index: 102;
-      background: var(--deep-brown);
-      color: var(--warm-white);
-      display: grid;
-      place-items: center;
-      transform: translateY(-105%);
-      transition: transform 280ms ease;
-      padding: 80px 24px 32px;
-    }
-
-    .mobile-nav.open {
-      transform: translateY(0);
-    }
-
-    .mobile-nav-inner {
-      display: grid;
-      gap: 18px;
-      width: min(440px, 100%);
-      text-align: center;
-    }
-
-    .mobile-nav a {
-      font-family: var(--serif);
-      font-size: 2.2rem;
-      letter-spacing: -0.04em;
     }
 
     .hero {
@@ -1083,8 +1053,35 @@
     }
 
     @media (max-width: 1040px) {
-      .desktop-nav {
-        display: none;
+      .primary-nav {
+        position: fixed;
+        inset: 0;
+        z-index: 102;
+        display: grid;
+        place-content: center;
+        gap: 18px;
+        padding: 80px 24px 32px;
+        background: var(--deep-brown);
+        color: var(--warm-white);
+        text-align: center;
+        transform: translateY(-105%);
+        transition: transform 280ms ease;
+      }
+
+      .primary-nav.open {
+        transform: translateY(0);
+      }
+
+      .primary-nav a {
+        font-family: var(--serif);
+        font-size: 2.2rem;
+        letter-spacing: -0.04em;
+      }
+
+      .primary-nav .nav-cta {
+        font-family: var(--sans);
+        font-size: 0.94rem;
+        letter-spacing: 0.01em;
       }
 
       .menu-toggle {
@@ -1225,7 +1222,7 @@
         Abi The Chef
       </a>
 
-      <nav class="desktop-nav" aria-label="Primary navigation">
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation" data-primary-nav>
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#sample-menu">Sample Menu</a>
@@ -1234,23 +1231,12 @@
         <a class="btn nav-cta" href="#consultation">Book a Consultation</a>
       </nav>
 
-      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="mobile-nav" aria-expanded="false" data-menu-toggle>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle>
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
-
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" data-mobile-nav>
-      <div class="mobile-nav-inner">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#sample-menu">Sample Menu</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#consultation">Consultation</a>
-        <a class="btn nav-cta" href="#consultation">Book a Consultation</a>
-      </div>
-    </nav>
   </header>
 
   <main id="main">
@@ -1698,8 +1684,8 @@
 
   <script>
     const menuToggle = document.querySelector('[data-menu-toggle]');
-    const mobileNav = document.querySelector('[data-mobile-nav]');
-    const mobileLinks = mobileNav.querySelectorAll('a');
+    const primaryNav = document.querySelector('[data-primary-nav]');
+    const navLinks = primaryNav.querySelectorAll('a');
     const year = document.querySelector('[data-year]');
     const revealItems = document.querySelectorAll('.reveal');
     const form = document.querySelector('[data-consultation-form]');
@@ -1713,24 +1699,24 @@
 
     function closeMenu() {
       document.body.classList.remove('menu-open');
-      mobileNav.classList.remove('open');
+      primaryNav.classList.remove('open');
       menuToggle.setAttribute('aria-expanded', 'false');
       menuToggle.setAttribute('aria-label', 'Open navigation menu');
     }
 
     function openMenu() {
       document.body.classList.add('menu-open');
-      mobileNav.classList.add('open');
+      primaryNav.classList.add('open');
       menuToggle.setAttribute('aria-expanded', 'true');
       menuToggle.setAttribute('aria-label', 'Close navigation menu');
     }
 
     menuToggle.addEventListener('click', () => {
-      const isOpen = mobileNav.classList.contains('open');
+      const isOpen = primaryNav.classList.contains('open');
       isOpen ? closeMenu() : openMenu();
     });
 
-    mobileLinks.forEach((link) => {
+    navLinks.forEach((link) => {
       link.addEventListener('click', closeMenu);
     });
 
