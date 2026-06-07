@@ -864,62 +864,24 @@
     }
 
     .form-panel {
-      padding: clamp(24px, 4vw, 44px);
       border-radius: 32px;
       background: rgba(249, 250, 254, 0.9);
       border: 1px solid var(--line);
       backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .contact-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .field {
-      display: grid;
-      gap: 8px;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      color: var(--navy);
-      font-weight: 760;
-      font-size: 0.92rem;
-    }
-
-    input,
-    textarea,
-    select {
+    .jotform-embed {
+      display: block;
       width: 100%;
-      border: 1px solid rgba(0, 50, 90, 0.18);
-      border-radius: 16px;
-      background: rgba(249, 250, 254, 0.92);
-      color: var(--text-gray);
-      padding: 0.92rem 1rem;
-      outline: none;
-      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      min-height: 820px;
+      border: 0;
+      background: #fff;
     }
 
-    textarea {
-      min-height: 142px;
-      resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--cta);
-      box-shadow: 0 0 0 4px rgba(239, 143, 126, 0.22);
-      background: #f9fafe;
-    }
-
-    .form-help {
-      grid-column: 1 / -1;
+    .form-fallback {
+      padding: 0 24px 24px;
       font-size: 0.92rem;
       color: var(--text-gray);
     }
@@ -1157,13 +1119,8 @@
       .value-grid,
       .steps,
       .testimonial-grid,
-      .occasion-grid,
-      .contact-form {
+      .occasion-grid {
         grid-template-columns: 1fr;
-      }
-
-      .field.full {
-        grid-column: auto;
       }
 
       .image-stack {
