@@ -4,6 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { EventEmitter } = require('node:events');
 const tls = require('node:tls');
+const fs = require('node:fs');
 const { formatMessage, sendEmail, validateSubmission } = require('./server');
 
 const validInput = {
@@ -19,6 +20,18 @@ const validInput = {
   message: 'We would love a seasonal tasting menu.',
   website: ''
 };
+
+
+test('serves weekly meal prep from the home page occasions section', () => {
+  const home = fs.readFileSync('index.html', 'utf8');
+  const mealPrep = fs.readFileSync('weekly-meal-prep.html', 'utf8');
+
+  assert.match(home, /href="weekly-meal-prep\.html">Weekly meal prep/);
+  assert.doesNotMatch(home, />Holiday gatherings</);
+  assert.match(mealPrep, /<title>Meal Prep Raleigh NC \| Personal Chef Meal Prep &amp; Prepared Meals<\/title>/);
+  assert.match(mealPrep, /Fresh weekly meal prep in Raleigh, NC from a personal chef/);
+  assert.match(mealPrep, /Request a Weekly Meal Prep Menu/);
+});
 
 test('validates and normalizes a complete consultation request', () => {
   const result = validateSubmission(validInput);
