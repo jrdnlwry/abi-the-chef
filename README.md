@@ -39,7 +39,7 @@ The homepage currently expects these files:
 - `images/private-dinner-table.jpg`
 - `images/abi-portrait.jpg`
 - `images/dish-1.jpg`
-- `images/dish-2.jpg`
+- `images/scallop.jpg`
 - `images/dish-3.jpg`
 - `images/gallery-1.jpg`
 
