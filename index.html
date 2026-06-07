@@ -930,7 +930,7 @@
       min-height: 1.1rem;
     }
 
-    .success-message {
+    .form-message {
       display: none;
       grid-column: 1 / -1;
       padding: 18px;
@@ -941,8 +941,28 @@
       font-weight: 750;
     }
 
-    .success-message.visible {
+    .form-message.visible {
       display: block;
+    }
+
+    .form-message.error-message {
+      background: #fff2ef;
+      border-color: var(--cta-hover);
+      color: var(--navy);
+    }
+
+    .contact-form button:disabled {
+      cursor: wait;
+      opacity: 0.72;
+      transform: none;
+    }
+
+    .website-field {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
     }
 
     .site-footer {
@@ -1546,9 +1566,12 @@
         </div>
 
         <div class="form-panel reveal">
-          <form class="contact-form" data-consultation-form novalidate>
-            <div class="success-message" data-success-message>
-              Thank you — your consultation request has been drafted. Abi will follow up to discuss details, availability, and a custom quote.
+          <form class="contact-form" action="/api/contact" method="post" data-consultation-form novalidate>
+            <div class="form-message" data-form-message role="status" aria-live="polite"></div>
+
+            <div class="website-field" aria-hidden="true">
+              <label for="website">Website</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
             </div>
 
             <div class="field">
@@ -1622,7 +1645,7 @@
               <span class="error" data-error-for="message"></span>
             </div>
 
-            <p class="form-help">Fields marked with * are required. This form is ready to later connect to Netlify Forms, Formspree, or a custom backend.</p>
+            <p class="form-help">Fields marked with * are required. Your request will be sent directly to Abi when you submit this form.</p>
 
             <div class="field full">
               <button class="btn btn-light" type="submit">Request Dining Consultation</button>
@@ -1678,7 +1701,8 @@
     const year = document.querySelector('[data-year]');
     const revealItems = document.querySelectorAll('.reveal');
     const form = document.querySelector('[data-consultation-form]');
-    const successMessage = document.querySelector('[data-success-message]');
+    const formMessage = document.querySelector('[data-form-message]');
+    const submitButton = form.querySelector('button[type="submit"]');
     const lightboxModal = document.querySelector('[data-lightbox-modal]');
     const lightboxImage = document.querySelector('[data-lightbox-image]');
     const lightboxClose = document.querySelector('[data-lightbox-close]');
@@ -1735,10 +1759,11 @@
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       clearErrors();
-      successMessage.classList.remove('visible');
+      formMessage.classList.remove('visible', 'error-message');
+      formMessage.textContent = '';
 
       const data = new FormData(form);
       const name = String(data.get('name') || '').trim();
@@ -1779,9 +1804,29 @@
 
       if (!valid) return;
 
-      successMessage.classList.add('visible');
-      form.reset();
-      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending Request…';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(data.entries()))
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.error || 'Your request could not be sent right now. Please try again later.');
+
+        form.reset();
+        formMessage.textContent = 'Thank you — your consultation request has been sent directly to Abi. She’ll follow up to discuss details, availability, and a custom quote.';
+        formMessage.classList.add('visible');
+      } catch (error) {
+        formMessage.textContent = error.message;
+        formMessage.classList.add('visible', 'error-message');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Request Dining Consultation';
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     });
 
     function openLightbox(src, alt) {
