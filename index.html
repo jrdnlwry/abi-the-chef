@@ -1566,12 +1566,9 @@
         </div>
 
         <div class="form-panel reveal">
-          <form class="contact-form" action="/api/contact" method="post" data-consultation-form novalidate>
-            <div class="form-message" data-form-message role="status" aria-live="polite"></div>
-
-            <div class="website-field" aria-hidden="true">
-              <label for="website">Website</label>
-              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          <form class="contact-form" action="mailto:hello@abithechef.com" method="post" enctype="text/plain" data-consultation-form data-recipient="hello@abithechef.com" novalidate>
+            <div class="success-message" data-success-message role="status" aria-live="polite">
+              Your email app should now show a message addressed to Abi. Review it, then select Send to deliver your consultation request.
             </div>
 
             <div class="field">
@@ -1645,7 +1642,7 @@
               <span class="error" data-error-for="message"></span>
             </div>
 
-            <p class="form-help">Fields marked with * are required. Your request will be sent directly to Abi when you submit this form.</p>
+            <p class="form-help">Fields marked with * are required. When you submit, your email app will open a pre-addressed message containing these details; select Send there to deliver it to Abi.</p>
 
             <div class="field full">
               <button class="btn btn-light" type="submit">Request Dining Consultation</button>
@@ -1804,29 +1801,28 @@
 
       if (!valid) return;
 
-      submitButton.disabled = true;
-      submitButton.textContent = 'Sending Request…';
+      const recipient = form.dataset.recipient;
+      const subjectName = name.replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ');
+      const fieldLabels = [
+        ['Name', 'name'],
+        ['Email', 'email'],
+        ['Phone', 'phone'],
+        ['Event date', 'event-date'],
+        ['Number of guests', 'guests'],
+        ['Location / city', 'location'],
+        ['Occasion type', 'occasion'],
+        ['Preferred consultation method', 'method'],
+        ['Dietary restrictions or preferences', 'dietary'],
+        ['Message / vision for the dinner', 'message']
+      ];
+      const emailBody = fieldLabels
+        .map(([label, fieldName]) => `${label}:\n${String(data.get(fieldName) || 'Not provided').trim() || 'Not provided'}`)
+        .join('\n\n');
+      const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(`Dining consultation request from ${subjectName}`)}&body=${encodeURIComponent(emailBody)}`;
 
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(Object.fromEntries(data.entries()))
-        });
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(result.error || 'Your request could not be sent right now. Please try again later.');
-
-        form.reset();
-        formMessage.textContent = 'Thank you — your consultation request has been sent directly to Abi. She’ll follow up to discuss details, availability, and a custom quote.';
-        formMessage.classList.add('visible');
-      } catch (error) {
-        formMessage.textContent = error.message;
-        formMessage.classList.add('visible', 'error-message');
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = 'Request Dining Consultation';
-        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+      successMessage.classList.add('visible');
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.location.href = mailtoUrl;
     });
 
     function openLightbox(src, alt) {
