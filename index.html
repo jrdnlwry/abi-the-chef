@@ -930,7 +930,7 @@
       min-height: 1.1rem;
     }
 
-    .success-message {
+    .form-message {
       display: none;
       grid-column: 1 / -1;
       padding: 18px;
@@ -941,8 +941,28 @@
       font-weight: 750;
     }
 
-    .success-message.visible {
+    .form-message.visible {
       display: block;
+    }
+
+    .form-message.error-message {
+      background: #fff2ef;
+      border-color: var(--cta-hover);
+      color: var(--navy);
+    }
+
+    .contact-form button:disabled {
+      cursor: wait;
+      opacity: 0.72;
+      transform: none;
+    }
+
+    .website-field {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
     }
 
     .site-footer {
@@ -1678,7 +1698,8 @@
     const year = document.querySelector('[data-year]');
     const revealItems = document.querySelectorAll('.reveal');
     const form = document.querySelector('[data-consultation-form]');
-    const successMessage = document.querySelector('[data-success-message]');
+    const formMessage = document.querySelector('[data-form-message]');
+    const submitButton = form.querySelector('button[type="submit"]');
     const lightboxModal = document.querySelector('[data-lightbox-modal]');
     const lightboxImage = document.querySelector('[data-lightbox-image]');
     const lightboxClose = document.querySelector('[data-lightbox-close]');
@@ -1735,10 +1756,11 @@
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       clearErrors();
-      successMessage.classList.remove('visible');
+      formMessage.classList.remove('visible', 'error-message');
+      formMessage.textContent = '';
 
       const data = new FormData(form);
       const name = String(data.get('name') || '').trim();

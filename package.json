@@ -1,0 +1,13 @@
+{
+  "name": "abi-the-chef",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Abi The Chef website and contact form server",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
