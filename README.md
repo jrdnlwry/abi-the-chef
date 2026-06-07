@@ -28,3 +28,19 @@ npm start
 ```
 
 The contact endpoint validates submissions, applies basic per-IP rate limiting and bot filtering, and sends the message with the visitor's address in `Reply-To`.
+
+## Site images
+
+Place production and staging image assets in an `images` directory at the repository root. Image filenames are case-sensitive in most hosting environments, and the files must be committed to the deployed branch.
+
+The homepage currently expects these files:
+
+- `images/abi-chef-hero.jpg`
+- `images/private-dinner-table.jpg`
+- `images/abi-portrait.jpg`
+- `images/dish-1.jpg`
+- `images/dish-2.jpg`
+- `images/dish-3.jpg`
+- `images/gallery-1.jpg`
+
+Before deploying, confirm an image is tracked with `git ls-files images/abi-chef-hero.jpg`. The site uses document-relative image URLs so previews also work when staging is hosted below a path such as `/abi-the-chef/`.
