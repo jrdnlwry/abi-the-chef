@@ -747,6 +747,29 @@
       text-align: center;
     }
 
+    a.occasion-pill {
+      transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+    }
+
+    a.occasion-pill:hover,
+    a.occasion-pill:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(0, 50, 90, 0.34);
+      background: var(--off-white);
+      box-shadow: 0 12px 30px rgba(0, 50, 90, 0.1);
+    }
+
+    a.occasion-pill span {
+      display: inline-block;
+      margin-left: 0.3rem;
+      transition: transform 220ms ease;
+    }
+
+    a.occasion-pill:hover span,
+    a.occasion-pill:focus-visible span {
+      transform: translate(2px, -2px);
+    }
+
     .dietary-card {
       display: grid;
       grid-template-columns: 0.88fr 1.12fr;
@@ -1384,7 +1407,7 @@
         </div>
 
         <div class="occasion-grid">
-          <div class="occasion-pill reveal">Private dinners</div>
+          <a class="occasion-pill reveal" href="private-dining.html">Private dinners <span aria-hidden="true">↗</span></a>
           <div class="occasion-pill reveal">Dinner parties</div>
           <div class="occasion-pill reveal">Holiday gatherings</div>
           <div class="occasion-pill reveal">Anniversaries</div>
