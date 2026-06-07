@@ -1546,9 +1546,9 @@
         </div>
 
         <div class="form-panel reveal">
-          <form class="contact-form" data-consultation-form novalidate>
-            <div class="success-message" data-success-message>
-              Thank you — your consultation request has been drafted. Abi will follow up to discuss details, availability, and a custom quote.
+          <form class="contact-form" action="mailto:hello@abithechef.com" method="post" enctype="text/plain" data-consultation-form data-recipient="hello@abithechef.com" novalidate>
+            <div class="success-message" data-success-message role="status" aria-live="polite">
+              Your email app should now show a message addressed to Abi. Review it, then select Send to deliver your consultation request.
             </div>
 
             <div class="field">
@@ -1622,7 +1622,7 @@
               <span class="error" data-error-for="message"></span>
             </div>
 
-            <p class="form-help">Fields marked with * are required. This form is ready to later connect to Netlify Forms, Formspree, or a custom backend.</p>
+            <p class="form-help">Fields marked with * are required. When you submit, your email app will open a pre-addressed message containing these details; select Send there to deliver it to Abi.</p>
 
             <div class="field full">
               <button class="btn btn-light" type="submit">Request Dining Consultation</button>
@@ -1779,9 +1779,28 @@
 
       if (!valid) return;
 
+      const recipient = form.dataset.recipient;
+      const subjectName = name.replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ');
+      const fieldLabels = [
+        ['Name', 'name'],
+        ['Email', 'email'],
+        ['Phone', 'phone'],
+        ['Event date', 'event-date'],
+        ['Number of guests', 'guests'],
+        ['Location / city', 'location'],
+        ['Occasion type', 'occasion'],
+        ['Preferred consultation method', 'method'],
+        ['Dietary restrictions or preferences', 'dietary'],
+        ['Message / vision for the dinner', 'message']
+      ];
+      const emailBody = fieldLabels
+        .map(([label, fieldName]) => `${label}:\n${String(data.get(fieldName) || 'Not provided').trim() || 'Not provided'}`)
+        .join('\n\n');
+      const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(`Dining consultation request from ${subjectName}`)}&body=${encodeURIComponent(emailBody)}`;
+
       successMessage.classList.add('visible');
-      form.reset();
       successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.location.href = mailtoUrl;
     });
 
     function openLightbox(src, alt) {
