@@ -636,19 +636,11 @@
     }
 
     .menu-card {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 0;
       background: var(--off-white);
       border-radius: 38px;
       overflow: hidden;
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
-    }
-
-    .menu-image {
-      min-height: 100%;
-      object-fit: cover;
     }
 
     .menu-content {
@@ -1007,7 +999,6 @@
       .hero-grid,
       .split,
       .farm-grid,
-      .menu-card,
       .dietary-card,
       .form-grid,
       .footer-grid {
@@ -1025,10 +1016,6 @@
 
       .steps {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .menu-image {
-        max-height: 420px;
       }
     }
 
@@ -1324,8 +1311,6 @@
     <section class="section menu-section" id="sample-menu" aria-labelledby="menu-heading">
       <div class="container">
         <div class="menu-card reveal">
-          <img class="menu-image" src="images/dish-salad.jpg" alt="Elegant plated dish from a sample private dining menu" />
-
           <div class="menu-content">
             <span class="eyebrow">Sample Menu</span>
             <h2 id="menu-heading">A Glimpse at the Table</h2>
