@@ -33,6 +33,16 @@ test('serves weekly meal prep from the home page occasions section', () => {
   assert.match(mealPrep, /Request a Weekly Meal Prep Menu/);
 });
 
+test('shows one consultation destination in the primary navigation', () => {
+  const home = fs.readFileSync('index.html', 'utf8');
+  const primaryNav = home.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/)?.[0];
+
+  assert.ok(primaryNav);
+  assert.equal((primaryNav.match(/href="#consultation"/g) || []).length, 1);
+  assert.doesNotMatch(primaryNav, />Consultation<\/a>/);
+  assert.match(primaryNav, />Book a Consultation<\/a>/);
+});
+
 test('validates and normalizes a complete consultation request', () => {
   const result = validateSubmission(validInput);
   assert.equal(result.name, 'Jordan Guest');
